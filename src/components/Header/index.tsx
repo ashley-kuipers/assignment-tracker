@@ -2,6 +2,8 @@ import styles from "./header.module.css";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { uppercase } from "../../helpers/stringHelpers";
 
+// If input is empty, have to disable button
+
 export function Header() {
   return (
     <header className={styles.header}>
