@@ -1,18 +1,24 @@
 import styles from "./assignment.module.css";
 import { TbTrash } from "react-icons/tb";
+import { AssignmentType } from '../Assignments';
 
-export function Assignment() {
-  return (
-    <div className={styles.assignment}>
-      <button className={styles.checkContainer}>
-        <div />
-      </button>
+type AssignmentProps = {
+    assignment: AssignmentType;  // Ensure you're passing the correct type as props
+};
 
-      <p>Some Title</p>
+export function Assignment({assignment}: AssignmentProps) {
+    console.log(" completed " + assignment.completed)
+    return (
+        <div className={styles.assignment}>
+            <button className={styles.checkContainer}>
+                <div className={assignment.completed ? styles.checked : ''}/>
+            </button>
 
-      <button className={styles.deleteButton}>
-        <TbTrash size={20} />
-      </button>
-    </div>
-  );
+            <p className={assignment.completed ? styles.textCompleted : ''}>{assignment.name}</p>
+
+            <button className={styles.deleteButton}>
+                <TbTrash size={20} />
+            </button>
+        </div>
+    );
 }
