@@ -9,6 +9,9 @@ export type AssignmentType = {
 
 export type AssignmentProps = {
     assignment: AssignmentType;
+    removeAssignment:(index: number) => void;
+    index: number;
+    markAsCompleted: (index: number) => void;
 };
 
 export type AssignmentsProps = {

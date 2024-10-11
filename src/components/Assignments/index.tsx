@@ -8,6 +8,23 @@ export function Assignments({ assignments, setAssignments }: AssignmentsProps) {
 
     const completedAssignmentsCount = assignments.filter(assignment => assignment.completed).length;
 
+    // Function to remove an assignment by index
+    const removeAssignment = (index: number) => {
+        setAssignments(assignments.filter((_, i) => i !== index));
+    };
+
+    // Function to mark an assignment as completed
+    const markAsCompleted = (index: number) => {
+        const updatedAssignments = assignments.map((assignment, i) => {
+            if (i === index) {
+                return { ...assignment, completed: true };
+            }
+            return assignment;
+        });
+
+        setAssignments(updatedAssignments);  // Update the state immutably
+    };
+
     return (
         <section className={styles.assignments}>
             <header className={styles.header}>
@@ -23,10 +40,8 @@ export function Assignments({ assignments, setAssignments }: AssignmentsProps) {
             </header>
 
             <div className={styles.list}>
-                {/* For assignment in createdAssignments, display an Assignment component */}
-                {/* Pass the whole assignment object so the name and completed props get dealt with */}
                 {assignments.map((assignment, index) => (
-                    <Assignment key={index} assignment={assignment} />
+                    <Assignment key={index} index={index} assignment={assignment} removeAssignment={removeAssignment} markAsCompleted={markAsCompleted} />
                 ))}
             </div>
         </section>
