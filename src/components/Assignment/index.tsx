@@ -1,10 +1,7 @@
 import styles from "./assignment.module.css";
 import { TbTrash } from "react-icons/tb";
-import { AssignmentType } from '../Assignments';
+import { AssignmentProps } from '../../App';
 
-type AssignmentProps = {
-    assignment: AssignmentType;  // Ensure you're passing the correct type as props
-};
 
 export function Assignment({assignment}: AssignmentProps) {
     console.log(" completed " + assignment.completed)

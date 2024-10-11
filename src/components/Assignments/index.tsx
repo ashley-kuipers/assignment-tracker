@@ -1,23 +1,10 @@
 import { Assignment } from "../Assignment";
 import styles from "./assignments.module.css";
-import React, { useState } from 'react';
+import { AssignmentProps, AssignmentsProps } from '../../App';
 
-// the Assignment object should have a name (string) and a completed (boolean) property
-export type AssignmentType = {
-    name: string;
-    completed: boolean;
-};
 
-const testData: AssignmentType[] = [
-    { name: 'New Task 1', completed: true },
-    { name: 'New Task 2', completed: false },
-    { name: 'New Task 3', completed: false },
-    { name: 'New Task 4', completed: false },
-];
-
-export function Assignments() {
-    // Create state variables for createdAssignments and completedAssignments (both are arrays of Assignment objects)
-    const [assignments, setAssignments] = useState<AssignmentType[]>(testData);
+export function Assignments({ assignments, setAssignments }: AssignmentsProps) {
+    
 
     const completedAssignmentsCount = assignments.filter(assignment => assignment.completed).length;
 
