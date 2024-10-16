@@ -1,9 +1,10 @@
+// Ashley Kuipers | Comp 3013 | Lab 3 | A01447667 | Fall 2024
 import styles from "./assignment.module.css";
-import { TbTrash } from "react-icons/tb";
 import { AssignmentProps } from '../../App';
 import { BsCheckCircleFill } from "react-icons/bs";
+import { TbTrash } from "react-icons/tb";
 
-
+// Component representing each individual assignment
 export function Assignment({index, assignment, removeAssignment, markAsCompleted}: AssignmentProps) {
 
     return (
