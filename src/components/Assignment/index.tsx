@@ -6,22 +6,48 @@ import { TbTrash } from "react-icons/tb";
 
 export type Props = {
     assignment: AssignmentType;
-    removeAssignment: (index: number) => void;
-    markAsCompleted: (index: number) => void;
+    setAssignments: React.Dispatch<React.SetStateAction<AssignmentType[]>>;
 };
 
+
+
 // Component representing each individual assignment
-export function Assignment({assignment, removeAssignment, markAsCompleted}: Props) {
+export function Assignment({assignment, setAssignments}: Props) {
+
+    function removeAssign(id: number) {
+        setAssignments((assignments: AssignmentType[]) => {
+            return assignments.filter((assignment: AssignmentType) => assignment.id !== id);
+        });
+    }
+    
+
+    function updateAssign(id:number) {
+        setAssignments( (assignments:AssignmentType[]) => {
+            return assignments.map((assignment) => {
+                if (assignment.id === id) {
+                    // if assignment is already marked as completed, toggle off
+                    if (assignment.completed) {
+                        return { ...assignment, completed: false }
+                    }
+                    // else toggle completed on
+                    return { ...assignment, completed: true };
+                }
+                return assignment;
+            });
+        })
+        
+
+    }
 
     return (
         <div className={styles.assignment}>
-            <button className={styles.checkContainer} onClick={() => markAsCompleted(assignment.id)}>
+            <button className={styles.checkContainer} onClick={() => updateAssign(assignment.id)}>
                 {assignment.completed ? <BsCheckCircleFill /> : <div />}
             </button>
 
             <p className={assignment.completed ? styles.textCompleted : ''}>{assignment.name}</p>
 
-            <button className={styles.deleteButton}  onClick={() => removeAssignment(assignment.id)}>
+            <button className={styles.deleteButton}  onClick={() => removeAssign(assignment.id)}>
                 <TbTrash size={20} />
             </button>
         </div>
