@@ -1,25 +1,30 @@
 // Ashley Kuipers | Comp 3013 | Lab 3 | A01447667 | Fall 2024
 import styles from "./assignments.module.css";
 import { Assignment } from "../Assignment";
-import { AssignmentsProps } from '../../App';
+import { AssignmentType } from '../../App';
+
+type Props = {
+    assignments: AssignmentType[];
+    setAssignments: React.Dispatch<React.SetStateAction<AssignmentType[]>>;
+}
 
 // Component to display the assignments list
-export function Assignments({ assignments, setAssignments }: AssignmentsProps) {
-    
+export function Assignments({ assignments, setAssignments }: Props) {
+
     const completedAssignmentsCount = assignments.filter(assignment => assignment.completed).length;
 
     // Function to remove an assignment by index
     const removeAssignment = (index: number) => {
-        setAssignments(assignments.filter((_, i) => i !== index));
+        setAssignments(assignments.filter((assignment) => assignment.id !== index));
     };
 
     // Function to mark an assignment as completed
     const markAsCompleted = (index: number) => {
         // go through each assignment in the assignments object and find the assignment at the index
-        const updatedAssignments = assignments.map((assignment, i) => {
-            if (i === index) {
+        const updatedAssignments = assignments.map((assignment) => {
+            if (assignment.id === index) {
                 // if assignment is already marked as completed, toggle off
-                if (assignment.completed){
+                if (assignment.completed) {
                     return { ...assignment, completed: false }
                 }
                 // else toggle completed on
@@ -50,7 +55,7 @@ export function Assignments({ assignments, setAssignments }: AssignmentsProps) {
             {/* Display each assignment in a list - pass down data and functions*/}
             <div className={styles.list}>
                 {assignments.map((assignment, index) => (
-                    <Assignment key={index} index={index} assignment={assignment} removeAssignment={removeAssignment} markAsCompleted={markAsCompleted} />
+                    <Assignment key={index} assignment={assignment} removeAssignment={removeAssignment} markAsCompleted={markAsCompleted} />
                 ))}
             </div>
         </section>

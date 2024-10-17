@@ -2,11 +2,17 @@
 import styles from "./header.module.css";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { uppercase } from "../../helpers/stringHelpers";
-import { AssignmentsProps } from '../../App';
+import { AssignmentType } from '../../App';
 import { useState, ChangeEvent, FormEvent  } from "react";
 
+type Props = {
+    assignments: AssignmentType[];
+    setAssignments: React.Dispatch<React.SetStateAction<AssignmentType[]>>;
+}
+let idCount=4;
+
 // Component representing the header of the page, including the new assignment form
-export function Header({ assignments, setAssignments }: AssignmentsProps) {
+export function Header({ assignments, setAssignments }: Props) {
 
     // set state variable and change function for input
     const [text, setText] = useState<string>("");
@@ -17,8 +23,9 @@ export function Header({ assignments, setAssignments }: AssignmentsProps) {
     // Form submission function
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        setAssignments([...assignments, { name: text, completed: false }]);
+        setAssignments([...assignments, { id:idCount, name: text, completed: false }]);
         setText('');
+        idCount++;
     }
 
 
@@ -32,7 +39,7 @@ export function Header({ assignments, setAssignments }: AssignmentsProps) {
                 <input placeholder="Add a new assignment" type="text" onChange={handleChange} value={text}/>
 
                 {/* Button is disabled if input (text variable) is empty */}
-                <button type="submit" disabled={!text}>
+                <button type="submit" disabled={text.trim() === ''}>
                     Create <AiOutlinePlusCircle size={20} />
                 </button>
 
