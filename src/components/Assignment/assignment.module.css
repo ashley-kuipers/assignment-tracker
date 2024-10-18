@@ -47,3 +47,25 @@ p.textCompleted {
   border: none;
   color: #808080;
 }
+
+.assignmentName{
+    display:flex;
+    flex-direction:row;
+    gap:12px;
+    align-items:center;
+}
+
+.dueGrey {
+    padding:5px 10px;
+    background-color:#5a5959;
+    border-radius:15px;
+    font-size:0.8rem !important;
+}
+
+.dueRed {
+    padding:5px 10px;
+    background-color:rgb(208, 66, 66);
+    font-size:0.8rem !important;
+    border-radius:15px;
+}
+

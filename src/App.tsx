@@ -4,18 +4,20 @@ import { Assignments } from "./components/Assignments";
 import { useState } from 'react';
 
 // Type representing a single assignment
+// because duedate can technically be undefined (when no date is picked yet using the picker), have to account for that situation
 export type AssignmentType = {
     id:number;
     name: string;
     completed: boolean;
+    dueDate:  Date | undefined;
 };
 
 // Test data to demonstrate application
 const testData: AssignmentType[] = [
-    { id:1, name: 'New Assignment 1', completed: true },
-    { id:2, name: 'New Assignment 2', completed: false },
-    { id:3, name: 'New Assignment 3', completed: false },
-    { id:4, name: 'New Assignment 4', completed: false },
+    { id:1, name: 'New Assignment 1', completed: true, dueDate: new Date("10/20/2024") },
+    { id:2, name: 'New Assignment 2', completed: false, dueDate: new Date("10/19/2024")  },
+    { id:3, name: 'New Assignment 3', completed: false, dueDate: new Date("10/23/2024")  },
+    { id:4, name: 'New Assignment 4', completed: false, dueDate: new Date("10/31/2024")  },
 ];
 
 function App() {

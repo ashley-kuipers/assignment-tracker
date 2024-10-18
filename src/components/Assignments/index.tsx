@@ -10,7 +10,7 @@ type Props = {
 
 // Component to display the assignments list
 export function Assignments({ assignments, setAssignments }: Props) {
-
+    // Getting number of completed assignments
     const completedAssignmentsCount = assignments.filter(assignment => assignment.completed).length;
 
     return (
@@ -28,7 +28,7 @@ export function Assignments({ assignments, setAssignments }: Props) {
                 </div>
             </header>
 
-            {/* Display each assignment in a list - pass down data and functions*/}
+            {/* Display each assignment in a list */}
             <div className={styles.list}>
                 {assignments.map((assignment, index) => (
                     <Assignment key={index} assignment={assignment} setAssignments={setAssignments} />
